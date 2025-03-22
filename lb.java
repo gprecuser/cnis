@@ -1,33 +1,33 @@
 import java.io.*;
 import java.util.*;
 
-class LeakyBucket {
+class Main {
     public static void main(String[] args) {
-        int no_of_queries = 4;
-        int bucket_size = 10;
-        int input_pkt_size = 4;
-        int output_pkt_size = 1;
+        int queries = 4;
+        int bucket = 10;
+        int input = 4;
+        int output = 1;
 
         int storage = 0;
-        for (int i = 0; i < no_of_queries; i++) {
-            int size_left = bucket_size - storage;
+        for (int i = 0; i < queries; i++) {
+            int space = bucket - storage;
 
-            if (input_pkt_size <= size_left) {
-                storage += input_pkt_size;
-                System.out.println("Packets added: " + input_pkt_size);
-                System.out.println("Buffer size: " + storage + " out of bucket size: " + bucket_size);
+            if (input <= space) {
+                storage += input;
+                System.out.println("Packets added: " + input);
+                System.out.println("Buffer size: " + storage + " out of bucket size: " + bucket);
             } else {
-                int lost_packets = input_pkt_size - size_left;
-                storage = bucket_size;
-                System.out.println("Packet loss: " + lost_packets);
-                System.out.println("Buffer size: " + storage + " out of bucket size: " + bucket_size);
+                int lost = input - space;
+                storage = bucket;
+                System.out.println("Packet loss: " + lost);
+                System.out.println("Buffer size: " + storage + " out of bucket size: " + bucket);
             }
 
-            storage -= output_pkt_size;
+            storage -= output;
             if (storage < 0) {
                 storage = 0;
             }
-            System.out.println("Buffer size after output: " + storage + " out of bucket size: " + bucket_size);
+            System.out.println("Buffer size after output: " + storage + " out of bucket size: " + bucket);
             System.out.println();
         }
     }
